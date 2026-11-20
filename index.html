@@ -79,6 +79,28 @@ a{text-decoration:none;color:inherit}
   background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .3s;
 }
 .nav-links a:hover::after{width:100%}
+
+/* dropdown menu */
+.has-dropdown{position:relative}
+.dropdown-toggle{display:inline-flex;align-items:center;gap:.35rem}
+.dropdown-toggle svg{width:14px;height:14px;transition:transform .3s;flex:none}
+.has-dropdown:hover>.dropdown-toggle svg{transform:rotate(180deg)}
+.dropdown{
+  position:absolute;top:calc(100% + 10px);left:0;min-width:250px;
+  background:#fff;border-radius:16px;box-shadow:var(--shadow);
+  padding:.55rem;list-style:none;z-index:60;
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .25s,transform .25s,visibility .25s;
+}
+.has-dropdown:hover>.dropdown{opacity:1;visibility:visible;transform:none}
+.dropdown li{position:relative}
+.dropdown a{
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+  padding:.62rem .9rem;border-radius:10px;font-size:.9rem;font-weight:600;color:var(--green-900);
+}
+.dropdown a::after{display:none}
+.dropdown a:hover{background:var(--green-50);color:var(--green-700)}
+.dropdown .dropdown{top:0;left:calc(100% + 6px)}
 .btn{
   display:inline-flex;align-items:center;gap:.55rem;
   padding:.8rem 1.6rem;border-radius:999px;font-weight:700;font-size:.95rem;
@@ -416,6 +438,17 @@ footer h4{color:#fff;font-size:1rem;margin-bottom:1.1rem;letter-spacing:.04em}
   .nav-links li{width:100%}
   .nav-links a{display:block;padding:.8rem 0;border-bottom:1px solid #eef3ef}
   .nav-links .btn{margin-top:1rem}
+  /* dropdown di mobile: accordion */
+  .dropdown{
+    position:static;min-width:0;box-shadow:none;padding:0 0 0 1.1rem;
+    opacity:1;visibility:visible;transform:none;display:none;
+    background:transparent;border-radius:0;
+  }
+  .has-dropdown.open>.dropdown{display:block}
+  .nav-links .dropdown-toggle{display:flex;align-items:center;justify-content:space-between}
+  .dropdown a{padding:.55rem 0;border-bottom:none;font-size:.9rem}
+  .dropdown .dropdown{padding-left:1.1rem}
+  .has-dropdown.open>.dropdown-toggle svg{transform:rotate(180deg)}
   .burger{display:block}
   .topbar .container{justify-content:center;text-align:center}
   section{padding:4rem 0}
@@ -449,12 +482,49 @@ footer h4{color:#fff;font-size:1rem;margin-bottom:1.1rem;letter-spacing:.04em}
     <nav>
       <ul class="nav-links" id="navLinks">
         <li><a href="#beranda">Beranda</a></li>
-        <li><a href="#sambutan">Sambutan</a></li>
-        <li><a href="#visi-misi">Visi &amp; Misi</a></li>
-        <li><a href="#program">Program</a></li>
+        <li class="has-dropdown">
+          <a href="#profil" class="dropdown-toggle">Profil <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <ul class="dropdown">
+            <li><a href="#profil">Profil Singkat</a></li>
+            <li><a href="#visi-misi">Visi dan Misi</a></li>
+            <li><a href="https://www.mimwaru.sch.id/struktur-organisasi-sekolah" target="_blank" rel="noopener">Struktur Organisasi Sekolah</a></li>
+            <li class="has-dropdown">
+              <a href="#" class="dropdown-toggle">Sarana Prasarana <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg></a>
+              <ul class="dropdown">
+                <li><a href="https://www.mimwaru.sch.id/ruang-perpustakaan" target="_blank" rel="noopener">Ruang Perpustakaan</a></li>
+                <li><a href="https://www.mimwaru.sch.id/ruang-uks" target="_blank" rel="noopener">Ruang UKS</a></li>
+                <li><a href="https://www.mimwaru.sch.id/ruang-mushola" target="_blank" rel="noopener">Ruang Mushola</a></li>
+                <li><a href="https://www.mimwaru.sch.id/ruang-anbk" target="_blank" rel="noopener">Ruang ANBK</a></li>
+                <li><a href="https://www.mimwaru.sch.id/parkiran-motor" target="_blank" rel="noopener">Parkiran Motor</a></li>
+                <li><a href="https://www.mimwaru.sch.id/parkiran-sepeda" target="_blank" rel="noopener">Parkiran Sepeda</a></li>
+                <li><a href="https://www.mimwaru.sch.id/panggung-sekolah" target="_blank" rel="noopener">Panggung Sekolah</a></li>
+                <li><a href="https://www.mimwaru.sch.id/pos-jaga" target="_blank" rel="noopener">Pos Jaga</a></li>
+              </ul>
+            </li>
+            <li><a href="https://www.mimwaru.sch.id/kalender-akademik" target="_blank" rel="noopener">Kalender Akademik</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
+        </li>
         <li><a href="#berita">Berita</a></li>
-        <li><a href="#galeri">Galeri</a></li>
-        <li><a href="#kontak">Kontak</a></li>
+        <li class="has-dropdown">
+          <a href="https://www.mimwaru.sch.id/data" target="_blank" rel="noopener" class="dropdown-toggle">Data <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <ul class="dropdown">
+            <li><a href="https://www.mimwaru.sch.id/guru" target="_blank" rel="noopener">Guru</a></li>
+            <li><a href="https://www.mimwaru.sch.id/staf" target="_blank" rel="noopener">Staf</a></li>
+            <li><a href="https://www.mimwaru.sch.id/siswa" target="_blank" rel="noopener">Siswa</a></li>
+            <li><a href="https://www.mimwaru.sch.id/kelas" target="_blank" rel="noopener">Kelas</a></li>
+            <li><a href="https://www.mimwaru.sch.id/alumni" target="_blank" rel="noopener">Alumni</a></li>
+          </ul>
+        </li>
+        <li><a href="https://www.mimwaru.sch.id/link-akademik" target="_blank" rel="noopener">Link Akademik</a></li>
+        <li><a href="https://www.mimwaru.sch.id/mading" target="_blank" rel="noopener">Mading</a></li>
+        <li class="has-dropdown">
+          <a href="#galeri" class="dropdown-toggle">Galeri <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <ul class="dropdown">
+            <li><a href="#galeri">Foto</a></li>
+            <li><a href="https://www.mimwaru.sch.id/video" target="_blank" rel="noopener">Video</a></li>
+          </ul>
+        </li>
         <li><a href="#ppdb" class="btn btn-gold btn-sm">PPDB Online</a></li>
       </ul>
     </nav>
@@ -867,7 +937,26 @@ window.addEventListener('scroll', () => {
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
 burger.addEventListener('click', () => navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// Dropdown menu: hover di desktop, accordion (tap) di mobile
+const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
+const closeAllDropdowns = () => navLinks.querySelectorAll('.has-dropdown.open').forEach(d => d.classList.remove('open'));
+navLinks.querySelectorAll('.dropdown-toggle').forEach(t => {
+  t.addEventListener('click', e => {
+    if (isMobile()) {
+      e.preventDefault();
+      const parent = t.parentElement;
+      const wasOpen = parent.classList.contains('open');
+      // tutup dropdown lain di level yang sama
+      parent.parentElement.querySelectorAll(':scope > .has-dropdown.open').forEach(d => d.classList.remove('open'));
+      parent.classList.toggle('open', !wasOpen);
+    }
+  });
+});
+navLinks.querySelectorAll('a:not(.dropdown-toggle)').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  closeAllDropdowns();
+}));
 
 // News ticker: duplikat konten agar animasi mulus
 const tickerInner = document.getElementById('tickerInner');
