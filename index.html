@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MI Muhammadiyah Waru — Madrasah Ibtidaiyah Unggulan</title>
+<meta name="description" content="Website resmi MI Muhammadiyah Waru, Baki, Sukoharjo — membentuk generasi Qur'ani, cerdas, dan berakhlak mulia.">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --green-950:#03211a;
+  --green-900:#052e22;
+  --green-800:#064e3b;
+  --green-700:#047857;
+  --green-600:#059669;
+  --green-500:#10b981;
+  --green-100:#d1fae5;
+  --green-50:#ecfdf5;
+  --gold:#d9a441;
+  --gold-light:#f2c14e;
+  --cream:#fbf8f1;
+  --ink:#14261f;
+  --muted:#5b6f66;
+  --white:#ffffff;
+  --radius:20px;
+  --shadow:0 20px 45px -18px rgba(5,46,34,.25);
+  --shadow-sm:0 8px 24px -10px rgba(5,46,34,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.65;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,92%);margin:0 auto}
+.serif{font-family:Georgia,"Times New Roman",serif}
+
+.pattern{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cpath d='M42 10 L50 34 L74 42 L50 50 L42 74 L34 50 L10 42 L34 34 Z' fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='1.5'/%3E%3Ccircle cx='42' cy='42' r='3' fill='%23ffffff' fill-opacity='0.07'/%3E%3C/svg%3E");
+}
+.pattern-dark{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cpath d='M42 10 L50 34 L74 42 L50 50 L42 74 L34 50 L10 42 L34 34 Z' fill='none' stroke='%23064e3b' stroke-opacity='0.06' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+/* ============ TOPBAR ============ */
+.topbar{
+  background:var(--green-950);color:#cfe8dc;font-size:.82rem;
+  padding:.5rem 0;position:relative;z-index:60;
+}
+.topbar .container{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.topbar span{display:inline-flex;align-items:center;gap:.45rem}
+.topbar svg{width:14px;height:14px;stroke:var(--gold-light)}
+.topbar a:hover{color:var(--gold-light)}
+#liveClock{font-variant-numeric:tabular-nums;font-weight:600;color:var(--gold-light)}
+
+/* ============ NAVBAR ============ */
+.navbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(251,248,241,.88);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(6,78,59,.08);
+  transition:box-shadow .3s;
+}
+.navbar.scrolled{box-shadow:var(--shadow-sm)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0;gap:1rem}
+.brand{display:flex;align-items:center;gap:.8rem}
+.brand-logo-img{height:52px;width:auto;flex:none;filter:drop-shadow(0 4px 10px rgba(5,46,34,.25))}
+.brand-name{font-weight:800;font-size:1.05rem;line-height:1.2;color:var(--green-900)}
+.brand-name small{display:block;font-weight:600;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:1.7rem;list-style:none}
+.nav-links a{font-weight:600;font-size:.93rem;color:var(--green-900);position:relative;padding:.3rem 0}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;height:3px;width:0;border-radius:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .3s;
+}
+.nav-links a:hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.8rem 1.6rem;border-radius:999px;font-weight:700;font-size:.95rem;
+  border:none;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s;
+}
+.btn-gold{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--green-950);box-shadow:0 12px 26px -10px rgba(217,164,65,.55)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 32px -10px rgba(217,164,65,.6)}
+.btn-outline{background:transparent;color:var(--green-800);border:2px solid var(--green-700)}
+.btn-outline:hover{background:var(--green-700);color:#fff;transform:translateY(-3px)}
+.btn-sm{padding:.6rem 1.25rem;font-size:.88rem}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:.4rem}
+.burger svg{width:28px;height:28px;stroke:var(--green-900)}
+
+/* ============ NEWS TICKER ============ */
+.ticker{
+  background:linear-gradient(90deg,var(--green-900),var(--green-800));
+  color:#eaf6ef;display:flex;align-items:stretch;overflow:hidden;
+  font-size:.85rem;position:relative;z-index:40;
+}
+.ticker-label{
+  background:var(--gold);color:var(--green-950);font-weight:800;letter-spacing:.1em;
+  padding:.55rem 1.1rem;display:flex;align-items:center;gap:.5rem;flex:none;text-transform:uppercase;font-size:.75rem;
+}
+.ticker-label svg{width:14px;height:14px}
+.ticker-track{display:flex;align-items:center;overflow:hidden;flex:1}
+.ticker-inner{display:flex;gap:3.5rem;white-space:nowrap;padding-left:2rem;animation:ticker 32s linear infinite}
+.ticker-inner a{display:inline-flex;align-items:center;gap:.6rem}
+.ticker-inner a::before{content:"◆";color:var(--gold-light);font-size:.6rem}
+.ticker-inner a:hover{color:var(--gold-light)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--green-950) 0%,var(--green-800) 55%,var(--green-700) 100%);
+  color:#fff;padding:4.5rem 0 6.5rem;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(600px 320px at 85% 15%,rgba(242,193,78,.22),transparent 65%),
+             radial-gradient(500px 300px at 10% 90%,rgba(16,185,129,.25),transparent 60%);
+}
+.hero .container{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:3.5rem;align-items:center}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
+  padding:.45rem 1rem;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.04em;
+  margin-bottom:1.4rem;backdrop-filter:blur(6px);
+}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--gold-light);box-shadow:0 0 0 4px rgba(242,193,78,.25)}
+.hero h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(2.3rem,5vw,3.7rem);line-height:1.12;font-weight:700;margin-bottom:1.2rem;
+}
+.hero h1 em{font-style:normal;color:var(--gold-light)}
+.hero p.lead{font-size:1.12rem;color:#d7efe3;max-width:34rem;margin-bottom:2.2rem}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.6rem}
+.hero-mini{display:flex;gap:2.2rem;flex-wrap:wrap}
+.hero-mini div b{display:block;font-size:1.5rem;color:var(--gold-light);font-family:Georgia,serif}
+.hero-mini div span{font-size:.8rem;color:#a9d8c2;letter-spacing:.06em;text-transform:uppercase}
+
+/* carousel foto asli */
+.hero-art{position:relative}
+.carousel{
+  position:relative;border-radius:28px;overflow:hidden;
+  box-shadow:0 35px 70px -25px rgba(0,0,0,.55);
+  border:4px solid rgba(255,255,255,.14);
+  aspect-ratio:16/10;background:var(--green-900);
+}
+.carousel img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transform:scale(1.06);transition:opacity .9s ease,transform 6s ease;
+}
+.carousel img.active{opacity:1;transform:scale(1)}
+.carousel-dots{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:3}
+.carousel-dots button{
+  width:10px;height:10px;border-radius:999px;border:none;cursor:pointer;
+  background:rgba(255,255,255,.45);transition:.3s;padding:0;
+}
+.carousel-dots button.active{width:30px;background:var(--gold-light)}
+.carousel-caption{
+  position:absolute;bottom:0;left:0;right:0;padding:2.6rem 1.4rem 1rem;z-index:2;
+  background:linear-gradient(to top,rgba(3,33,26,.75),transparent);
+  font-size:.85rem;font-weight:600;color:#eaf6ef;
+}
+.float-chip{
+  position:absolute;display:flex;align-items:center;gap:.6rem;
+  background:#fff;color:var(--green-900);border-radius:16px;padding:.7rem 1rem;
+  box-shadow:var(--shadow);font-size:.82rem;font-weight:700;z-index:4;
+  animation:floaty 5s ease-in-out infinite;
+}
+.float-chip small{display:block;font-weight:600;color:var(--muted);font-size:.7rem}
+.float-chip .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none}
+.float-chip .ic svg{width:20px;height:20px}
+.chip-1{top:-18px;left:-14px}
+.chip-2{bottom:-16px;right:-10px;animation-delay:2.4s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ============ STATS ============ */
+.stats{margin-top:-3.2rem;position:relative;z-index:5}
+.stats-grid{
+  background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+  display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden;
+}
+.stat{padding:2rem 1.4rem;text-align:center;border-right:1px solid #eef3ef}
+.stat:last-child{border-right:none}
+.stat .num{font-family:Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--green-800);line-height:1}
+.stat .num i{font-style:normal;color:var(--gold)}
+.stat .lbl{font-size:.82rem;color:var(--muted);margin-top:.45rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+
+/* ============ SECTIONS ============ */
+section{padding:6rem 0}
+.sec-head{max-width:44rem;margin-bottom:3.2rem}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:.9rem;
+}
+.kicker::before{content:"";width:34px;height:2px;background:var(--gold);border-radius:2px}
+.sec-head.center .kicker::after{content:"";width:34px;height:2px;background:var(--gold);border-radius:2px}
+.sec-head h2{font-family:Georgia,serif;font-size:clamp(1.9rem,3.6vw,2.7rem);line-height:1.2;color:var(--green-900);margin-bottom:.9rem}
+.sec-head p{color:var(--muted);font-size:1.05rem}
+
+/* ============ SAMBUTAN ============ */
+.sambutan-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:4rem;align-items:center}
+.sambutan-photo{position:relative}
+.sambutan-photo .frame{
+  border-radius:28px;overflow:hidden;box-shadow:var(--shadow);
+  aspect-ratio:3/4;background:var(--green-100);
+}
+.sambutan-photo .frame img{width:100%;height:100%;object-fit:cover}
+.sambutan-photo::after{
+  content:"";position:absolute;inset:0;border-radius:28px;
+  border:3px solid var(--gold);transform:translate(18px,18px);z-index:-1;opacity:.55;
+}
+.sambutan-name{
+  position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,.94);backdrop-filter:blur(8px);
+  border-radius:14px;padding:.7rem 1.3rem;text-align:center;box-shadow:var(--shadow-sm);white-space:nowrap;
+}
+.sambutan-name b{color:var(--green-900);display:block;font-size:.95rem}
+.sambutan-name span{font-size:.75rem;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.sambutan-text blockquote{
+  font-family:Georgia,serif;font-size:1.3rem;line-height:1.5;color:var(--green-900);
+  border-left:4px solid var(--gold);padding-left:1.4rem;margin-bottom:1.4rem;
+}
+.sambutan-text p{color:var(--muted);margin-bottom:1.1rem}
+.sambutan-sign{margin-top:1.6rem;display:flex;align-items:center;gap:1rem}
+.sambutan-sign .sig{font-family:Georgia,serif;font-style:italic;font-size:1.6rem;color:var(--green-700)}
+.sambutan-sign small{color:var(--muted);display:block}
+
+/* ============ VISI & MISI ============ */
+.visi-misi{background:var(--green-50)}
+.vm-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:1.6rem;align-items:stretch}
+.visi-card{
+  background:linear-gradient(160deg,var(--green-800),var(--green-950));
+  color:#fff;border-radius:var(--radius);padding:2.6rem;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.visi-card::after{
+  content:"";position:absolute;right:-40px;bottom:-40px;width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(242,193,78,.35),transparent 70%);
+}
+.visi-card .kicker{color:var(--gold-light)}
+.visi-card p{font-family:Georgia,serif;font-size:1.45rem;line-height:1.55}
+.misi-card{
+  background:#fff;border-radius:var(--radius);padding:2.6rem;
+  border:1px solid rgba(6,78,59,.08);box-shadow:var(--shadow-sm);
+}
+.misi-card ol{list-style:none;display:grid;gap:1.05rem;counter-reset:misi}
+.misi-card li{
+  display:flex;gap:1rem;align-items:flex-start;font-size:.98rem;color:var(--ink);
+}
+.misi-card li::before{
+  counter-increment:misi;content:counter(misi);
+  flex:none;width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(145deg,var(--green-700),var(--green-900));
+  color:var(--gold-light);font-weight:800;font-size:.9rem;
+  display:grid;place-items:center;margin-top:.1rem;
+}
+
+/* ============ PROFIL SINGKAT ============ */
+.profil-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.profil-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm)}
+.profil-table th,.profil-table td{padding:.95rem 1.3rem;text-align:left;font-size:.95rem;border-bottom:1px solid #eef3ef}
+.profil-table tr:last-child th,.profil-table tr:last-child td{border-bottom:none}
+.profil-table th{width:42%;background:var(--green-50);color:var(--green-900);font-weight:700}
+.profil-table td{color:var(--muted)}
+.profil-points{list-style:none;display:grid;gap:1.1rem;margin-top:1.6rem}
+.profil-points li{display:flex;gap:.9rem;align-items:flex-start}
+.profil-points .ic{
+  flex:none;width:44px;height:44px;border-radius:14px;
+  background:linear-gradient(145deg,var(--green-700),var(--green-900));
+  display:grid;place-items:center;color:var(--gold-light);
+}
+.profil-points .ic svg{width:22px;height:22px}
+.profil-points b{color:var(--green-900);display:block}
+.profil-points span{font-size:.9rem;color:var(--muted)}
+
+/* ============ PROGRAM ============ */
+.program{background:var(--green-50)}
+.prog-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.prog-card{
+  background:#fff;border-radius:var(--radius);padding:2rem 1.6rem;
+  border:1px solid rgba(6,78,59,.08);transition:transform .35s,box-shadow .35s;
+  position:relative;overflow:hidden;
+}
+.prog-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--green-600),var(--gold-light));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.prog-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.prog-card:hover::before{transform:scaleX(1)}
+.prog-ic{
+  width:60px;height:60px;border-radius:18px;margin-bottom:1.2rem;
+  background:linear-gradient(145deg,var(--green-700),var(--green-900));
+  display:grid;place-items:center;color:var(--gold-light);
+}
+.prog-ic svg{width:28px;height:28px}
+.prog-card h3{font-size:1.12rem;color:var(--green-900);margin-bottom:.55rem}
+.prog-card p{font-size:.92rem;color:var(--muted)}
+
+/* ============ BERITA ============ */
+.news-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
+.news-card{
+  background:#fff;border-radius:var(--radius);overflow:hidden;
+  border:1px solid rgba(6,78,59,.08);transition:transform .35s,box-shadow .35s;
+  display:flex;flex-direction:column;
+}
+.news-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.news-thumb{height:160px;position:relative;overflow:hidden}
+.news-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.news-card:hover .news-thumb img{transform:scale(1.08)}
+.news-thumb .thumb-icon{height:100%;display:grid;place-items:center}
+.news-thumb .thumb-icon svg{width:54px;height:54px;opacity:.9;transition:transform .5s}
+.news-card:hover .thumb-icon svg{transform:scale(1.15) rotate(-4deg)}
+.news-thumb .tag{
+  position:absolute;top:.9rem;left:.9rem;background:rgba(255,255,255,.92);
+  color:var(--green-800);font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:.3rem .7rem;border-radius:999px;z-index:2;
+}
+.news-body{padding:1.4rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
+.news-date{display:flex;align-items:center;gap:.45rem;font-size:.78rem;color:var(--muted);font-weight:600}
+.news-date svg{width:14px;height:14px;stroke:var(--gold)}
+.news-body h3{font-size:1.02rem;line-height:1.45;color:var(--green-900)}
+.news-body p{font-size:.88rem;color:var(--muted);flex:1}
+.news-link{font-weight:700;font-size:.88rem;color:var(--green-700);display:inline-flex;align-items:center;gap:.4rem}
+.news-link svg{width:16px;height:16px;transition:transform .3s}
+.news-card:hover .news-link svg{transform:translateX(4px)}
+
+/* ============ GALERI ============ */
+.galeri{background:linear-gradient(170deg,var(--green-900),var(--green-950));color:#fff;position:relative;overflow:hidden}
+.galeri .sec-head h2{color:#fff}
+.galeri .sec-head p{color:#a9d8c2}
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.gal-item{
+  position:relative;border-radius:var(--radius);overflow:hidden;height:230px;cursor:pointer;
+  background:var(--green-800);
+}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.gal-item:hover img{transform:scale(1.08)}
+.gal-item .overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.3rem;background:linear-gradient(to top,rgba(3,33,26,.88) 0%,rgba(3,33,26,.25) 55%,transparent 100%);
+}
+.gal-item .overlay h3{font-size:1rem;line-height:1.4}
+.gal-item .overlay span{font-size:.78rem;color:var(--gold-light);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:.25rem}
+.gal-item .count{
+  position:absolute;top:.9rem;right:.9rem;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3);font-size:.72rem;font-weight:700;
+  padding:.3rem .7rem;border-radius:999px;z-index:2;
+}
+
+/* ============ PPDB CTA ============ */
+.ppdb{padding:5rem 0}
+.ppdb-box{
+  background:linear-gradient(135deg,var(--gold-light),var(--gold) 60%,#c98f2b);
+  border-radius:30px;padding:3.4rem;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;align-items:center;
+  box-shadow:0 30px 60px -22px rgba(217,164,65,.55);
+}
+.ppdb-box h2{font-family:Georgia,serif;font-size:clamp(1.8rem,3.4vw,2.5rem);color:var(--green-950);line-height:1.2;margin-bottom:.8rem}
+.ppdb-box p{color:#5c430f;font-weight:600;max-width:30rem}
+.ppdb-feats{list-style:none;display:grid;gap:.7rem;margin-top:1.4rem}
+.ppdb-feats li{display:flex;gap:.6rem;align-items:center;font-weight:700;color:var(--green-950);font-size:.95rem}
+.ppdb-feats svg{width:20px;height:20px;flex:none}
+.ppdb-side{background:rgba(255,255,255,.85);border-radius:22px;padding:2rem;text-align:center;backdrop-filter:blur(6px)}
+.ppdb-side .big{font-family:Georgia,serif;font-size:2.6rem;color:var(--green-800);line-height:1}
+.ppdb-side p{font-size:.9rem;color:var(--muted);margin:.5rem 0 1.4rem}
+.ppdb-side .btn{width:100%;justify-content:center}
+
+/* ============ FOOTER ============ */
+footer{background:var(--green-950);color:#b9d9c9;padding:4.5rem 0 0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.6rem;padding-bottom:3rem}
+.foot-brand .brand-name{color:#fff}
+.foot-brand p{font-size:.92rem;margin-top:1rem;max-width:20rem}
+footer h4{color:#fff;font-size:1rem;margin-bottom:1.1rem;letter-spacing:.04em}
+.foot-links{list-style:none;display:grid;gap:.6rem;font-size:.92rem}
+.foot-links a:hover{color:var(--gold-light)}
+.foot-contact{list-style:none;display:grid;gap:.85rem;font-size:.92rem}
+.foot-contact li{display:flex;gap:.7rem;align-items:flex-start}
+.foot-contact svg{width:18px;height:18px;flex:none;stroke:var(--gold-light);margin-top:.2rem}
+.foot-bottom{
+  border-top:1px solid rgba(255,255,255,.1);padding:1.4rem 0;
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.85rem;
+}
+.foot-bottom b{color:var(--gold-light)}
+
+/* ============ REVEAL ANIMATION ============ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1024px){
+  .prog-grid,.news-grid{grid-template-columns:repeat(2,1fr)}
+  .gal-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .vm-grid,.profil-grid{grid-template-columns:1fr}
+}
+@media(max-width:860px){
+  .hero .container{grid-template-columns:1fr;gap:3rem}
+  .sambutan-grid{grid-template-columns:1fr;gap:3rem}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat{border-bottom:1px solid #eef3ef}
+  .ppdb-box{grid-template-columns:1fr;padding:2.2rem}
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;background:#fff;
+    flex-direction:column;align-items:flex-start;gap:0;padding:1rem 4%;
+    box-shadow:var(--shadow);transform:translateY(-12px);opacity:0;pointer-events:none;transition:.3s;
+  }
+  .nav-links.open{transform:none;opacity:1;pointer-events:auto}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:.8rem 0;border-bottom:1px solid #eef3ef}
+  .nav-links .btn{margin-top:1rem}
+  .burger{display:block}
+  .topbar .container{justify-content:center;text-align:center}
+  section{padding:4rem 0}
+}
+@media(max-width:560px){
+  .prog-grid,.news-grid,.gal-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .chip-1{left:0}.chip-2{right:0}
+  .hero-mini{gap:1.4rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOPBAR ===== -->
+<div class="topbar">
+  <div class="container">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jl. Waru-Gentan, Dusun III, Waru, Kec. Baki, Sukoharjo</span>
+    <span id="liveClock">Memuat waktu...</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg> info@mimwaru.sch.id</span>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="brand">
+      <img src="images/logo.webp" alt="Logo MI Muhammadiyah Waru" class="brand-logo-img">
+      <span class="brand-name">MI Muhammadiyah Waru<small>Madrasah Ibtidaiyah</small></span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#sambutan">Sambutan</a></li>
+        <li><a href="#visi-misi">Visi &amp; Misi</a></li>
+        <li><a href="#program">Program</a></li>
+        <li><a href="#berita">Berita</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+        <li><a href="#ppdb" class="btn btn-gold btn-sm">PPDB Online</a></li>
+      </ul>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===== NEWS TICKER ===== -->
+<div class="ticker">
+  <span class="ticker-label">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    News Update
+  </span>
+  <div class="ticker-track">
+    <div class="ticker-inner" id="tickerInner">
+      <a href="#berita">CERIA PANDU ATHFAL 2026: Kwarcab HW Baki Raih Juara Umum</a>
+      <a href="#berita">Penanggulangan Bullying, Begini Caranya</a>
+      <a href="#berita">Mengapa Ekstrakulikuler Itu Penting?</a>
+      <a href="#berita">Metode Pembelajaran untuk Kurikulum Merdeka</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero pattern" id="beranda">
+  <div class="container">
+    <div>
+      <span class="hero-badge"><span class="dot"></span> Selamat Datang di Website Resmi Kami</span>
+      <h1>Membentuk Generasi <em>Qur'ani</em>, Cerdas, dan Berakhlak Mulia</h1>
+      <p class="lead">MI Muhammadiyah Waru menghadirkan pendidikan Islam berkualitas dengan Kurikulum Merdeka, pembiasaan ibadah, dan lingkungan belajar yang aman serta menyenangkan bagi putra-putri Anda.</p>
+      <div class="hero-cta">
+        <a href="#ppdb" class="btn btn-gold">Daftar PPDB Sekarang
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#program" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.5)">Jelajahi Program</a>
+      </div>
+      <div class="hero-mini">
+        <div><b>Kurikulum Merdeka</b><span>Implementasi Penuh</span></div>
+        <div><b>Hizbul Wathan</b><span>Juara Umum CPA 2026</span></div>
+        <div><b>Tahfidz</b><span>Program Unggulan</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="carousel" id="carousel">
+        <img src="images/slider-1.webp" alt="Kegiatan di MI Muhammadiyah Waru" class="active">
+        <img src="images/slider-2.webp" alt="Suasana belajar di MI Muhammadiyah Waru">
+        <img src="images/slider-3.webp" alt="Kegiatan siswa MI Muhammadiyah Waru">
+        <div class="carousel-caption">Suasana belajar di MI Muhammadiyah Waru</div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+      <div class="float-chip chip-1">
+        <span class="ic" style="background:var(--green-100);color:var(--green-700)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+        </span>
+        <span>Tahfidz Qur'an<small>Program Unggulan</small></span>
+      </div>
+      <div class="float-chip chip-2">
+        <span class="ic" style="background:#fef3c7;color:var(--gold)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </span>
+        <span>Juara Umum<small>Ceria Pandu Athfal 2026</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat"><div class="num"><span class="counter" data-target="350">0</span><i>+</i></div><div class="lbl">Peserta Didik</div></div>
+      <div class="stat"><div class="num"><span class="counter" data-target="28">0</span><i>+</i></div><div class="lbl">Guru &amp; Karyawan</div></div>
+      <div class="stat"><div class="num"><span class="counter" data-target="40">0</span><i>+</i></div><div class="lbl">Tahun Mengabdi</div></div>
+      <div class="stat"><div class="num"><span class="counter" data-target="98">0</span><i>%</i></div><div class="lbl">Orang Tua Puas</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SAMBUTAN ===== -->
+<section id="sambutan">
+  <div class="container">
+    <div class="sambutan-grid">
+      <div class="sambutan-photo reveal">
+        <div class="frame">
+          <img src="images/kepala-sekolah.webp" alt="Hj. Khusnul — Kepala MI Muhammadiyah Waru">
+        </div>
+        <div class="sambutan-name">
+          <b>Hj. Khusnul</b>
+          <span>Kepala Madrasah</span>
+        </div>
+      </div>
+      <div class="sambutan-text reveal">
+        <span class="kicker">Sambutan Kepala Madrasah</span>
+        <blockquote>"Salam damai dan sejahtera bagi kita semua. Puji syukur kami panjatkan ke hadirat Allah SWT atas karunia dan berkah yang tiada putus telah dilimpahkan-Nya."</blockquote>
+        <p>Saya sebagai pimpinan sekolah menyambut baik dan gembira atas prakarsa segenap guru dan karyawan MI Muhammadiyah Waru dalam menyediakan website sekolah sebagai sarana informasi publik untuk meningkatkan pelayanan kepada masyarakat dalam bidang pendidikan, khususnya bagi keluarga besar MI Muhammadiyah Waru.</p>
+        <p>Semoga dengan tersedianya website ini, masyarakat akan lebih mudah mengakses informasi dan mendapatkan pelayanan yang lebih cepat, mudah, valid, dan akuntabel. Selain itu, diharapkan website ini mampu meningkatkan kreativitas dan semangat berkarya bagi segenap guru dan karyawan MI Muhammadiyah Waru.</p>
+        <p>Saya menyampaikan ucapan terima kasih kepada semua pihak yang telah membantu tersedianya website sekolah ini. Kritik dan saran yang konstruktif sangat kami harapkan demi perbaikan dan peningkatan kualitas serta kemanfaatannya yang lebih luas.</p>
+        <div class="sambutan-sign">
+          <span class="sig">Khusnul</span>
+          <small><b>Hj. Khusnul</b><br>Kepala MI Muhammadiyah Waru</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISI & MISI ===== -->
+<section class="visi-misi pattern-dark" id="visi-misi">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="kicker">Visi &amp; Misi</span>
+      <h2>Arah dan Tujuan Madrasah Kami</h2>
+      <p>Visi dan misi yang menjadi pedoman dalam setiap langkah pendidikan di MI Muhammadiyah Waru.</p>
+    </div>
+    <div class="vm-grid">
+      <div class="visi-card reveal">
+        <span class="kicker">Visi</span>
+        <p>"Menjadikan sekolah yang unggul dengan lulusan yang berprestasi, disiplin, berkarakter baik, inovatif, kreatif, dan siap berkarier."</p>
+      </div>
+      <div class="misi-card reveal">
+        <span class="kicker">Misi</span>
+        <ol>
+          <li>Mewujudkan lingkungan pendidikan yang Islami dan berakhlak mulia.</li>
+          <li>Mewujudkan budaya disiplin sekolah.</li>
+          <li>Menumbuhkan semangat keunggulan dan kompetitif yang kreatif dan inovatif bagi seluruh warga sekolah.</li>
+          <li>Mewujudkan kegiatan pendidikan yang bermutu dan inovatif dengan berbasis proyek (Project Based Learning) dan/atau berbasis permasalahan terkini (Problem Based Learning).</li>
+          <li>Mewujudkan manajemen yang transparan, akuntabel, efektif, dan partisipatif.</li>
+          <li>Menyiapkan lulusan yang siap berkarier.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROFIL SINGKAT ===== -->
+<section id="profil">
+  <div class="container">
+    <div class="profil-grid">
+      <div class="reveal">
+        <span class="kicker">Profil Singkat</span>
+        <h2 class="serif" style="font-size:clamp(1.9rem,3.6vw,2.7rem);color:var(--green-900);line-height:1.2;margin-bottom:.9rem">Identitas Satuan Pendidikan</h2>
+        <p style="color:var(--muted)">MI Muhammadiyah Waru adalah madrasah ibtidaiyah Muhammadiyah yang berlokasi di Waru, Kecamatan Baki, Kabupaten Sukoharjo, Jawa Tengah — berkomitmen mencetak generasi Qur'ani, cerdas, dan berakhlak mulia.</p>
+        <ul class="profil-points">
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg></span>
+            <div><b>Jenjang Madrasah Ibtidaiyah (MI)</b><span>Pendidikan dasar Islam berbasis nilai-nilai Muhammadiyah</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+            <div><b>Waktu Penyelenggaraan Penuh</b><span>Pembelajaran 5 hari dalam sepekan, sehari penuh</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><b>Lokasi Strategis di Baki, Sukoharjo</b><span>Mudah dijangkau dari Waru-Gentan dan sekitarnya</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <table class="profil-table">
+          <tr><th>Nama Sekolah</th><td>MI Muhammadiyah Waru</td></tr>
+          <tr><th>NPSN</th><td>30104429</td></tr>
+          <tr><th>Alamat</th><td>Jl. Waru-Gentan, Dusun III, Waru</td></tr>
+          <tr><th>Kecamatan</th><td>Baki</td></tr>
+          <tr><th>Kabupaten / Kota</th><td>Sukoharjo</td></tr>
+          <tr><th>Provinsi</th><td>Jawa Tengah</td></tr>
+          <tr><th>Kode Pos</th><td>57556</td></tr>
+          <tr><th>Email</th><td>info@mimwaru.sch.id</td></tr>
+          <tr><th>Website</th><td>www.mimwaru.sch.id</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROGRAM ===== -->
+<section class="program pattern-dark" id="program">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="kicker">Program Unggulan</span>
+      <h2>Belajar dengan Iman, Ilmu, dan Akhlak</h2>
+      <p>Kurikulum Merdeka dipadukan dengan nilai-nilai Islam Muhammadiyah untuk mencetak lulusan yang cerdas, mandiri, dan berkarakter.</p>
+    </div>
+    <div class="prog-grid">
+      <article class="prog-card reveal">
+        <span class="prog-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M9 7h7M9 11h5"/></svg></span>
+        <h3>Tahfidz &amp; Tadarus Al-Qur'an</h3>
+        <p>Pembiasaan tadarus Al-Qur'an setiap hari Jumat dan program tahfidz bertahap untuk menanamkan cinta Al-Qur'an sejak dini.</p>
+      </article>
+      <article class="prog-card reveal">
+        <span class="prog-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 10v6"/></svg></span>
+        <h3>Kurikulum Merdeka</h3>
+        <p>Pembelajaran berbasis proyek (PBL) dan permasalahan terkini yang interaktif, sesuai dengan metode Kurikulum Merdeka.</p>
+      </article>
+      <article class="prog-card reveal">
+        <span class="prog-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <h3>Pembiasaan Ibadah</h3>
+        <p>Shalat berjamaah, doa harian, dan adab Islami yang dibiasakan setiap hari di lingkungan madrasah.</p>
+      </article>
+      <article class="prog-card reveal">
+        <span class="prog-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <h3>Hizbul Wathan &amp; Ekstrakurikuler</h3>
+        <p>Kepanduan Hizbul Wathan, seni, olahraga, dan kegiatan kepemimpinan — terbukti meraih Juara Umum Ceria Pandu Athfal 2026.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BERITA ===== -->
+<section id="berita">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="kicker">News Update</span>
+      <h2>Kabar Terbaru dari Madrasah</h2>
+      <p>Berita, kegiatan, dan informasi terkini seputar MI Muhammadiyah Waru.</p>
+    </div>
+    <div class="news-grid">
+      <article class="news-card reveal">
+        <div class="news-thumb">
+          <span class="tag">Prestasi</span>
+          <img src="images/berita-cpa.webp" alt="Ceria Pandu Athfal 2026">
+        </div>
+        <div class="news-body">
+          <span class="news-date"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> 02 September 2026</span>
+          <h3>CERIA PANDU ATHFAL 2026</h3>
+          <p>Kwarcab Gerakan Kepanduan Hizbul Wathan (HW) Baki berhasil meraih Juara Umum Ceria Pandu Athfal 2026 di Lapangan Tepisari, Polokarto, Sukoharjo — termasuk Juara 1 LCC dan Juara 1 K3 Tenda.</p>
+          <a href="https://www.mimwaru.sch.id/berita/detail/996878/ceria-pandu-athfal-2026-/" target="_blank" rel="noopener" class="news-link">Baca Selengkapnya <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="news-card reveal">
+        <div class="news-thumb">
+          <span class="tag">Artikel</span>
+          <div class="thumb-icon" style="background:linear-gradient(140deg,#d9a441,#b07d1e)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#052e22" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+        </div>
+        <div class="news-body">
+          <span class="news-date"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> 12 Januari 2023</span>
+          <h3>Penanggulangan Bullying, Begini Caranya</h3>
+          <p>Pemerintah melalui Kemdikbud Ristek terus berupaya melakukan pencegahan bullying atau perundungan di sekolah. Berikut pengertian, jenis, dampak, dan upaya pencegahannya.</p>
+          <a href="https://www.mimwaru.sch.id/berita/detail/993775/penanggulangan-bullying-begini-caranya/" target="_blank" rel="noopener" class="news-link">Baca Selengkapnya <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="news-card reveal">
+        <div class="news-thumb">
+          <span class="tag">Artikel</span>
+          <div class="thumb-icon" style="background:linear-gradient(140deg,#10b981,#047857)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fef3c7" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          </div>
+        </div>
+        <div class="news-body">
+          <span class="news-date"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> 12 Januari 2023</span>
+          <h3>Mengapa Ekstrakulikuler Itu Penting?</h3>
+          <p>Kegiatan ekstrakurikuler merupakan wadah untuk menyalurkan minat dan bakat siswa. Berikut 5 manfaatnya: tanggung jawab, bakat, organisasi, kerja sama, dan disiplin.</p>
+          <a href="https://www.mimwaru.sch.id/berita/detail/993774/mengapa-ekstrakulikuler-itu-penting/" target="_blank" rel="noopener" class="news-link">Baca Selengkapnya <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="news-card reveal">
+        <div class="news-thumb">
+          <span class="tag">Akademik</span>
+          <div class="thumb-icon" style="background:linear-gradient(140deg,#065f46,#052e22)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f2c14e" stroke-width="1.6"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+        </div>
+        <div class="news-body">
+          <span class="news-date"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> 12 Januari 2023</span>
+          <h3>Metode Pembelajaran untuk Kurikulum Merdeka</h3>
+          <p>Memasuki era Kurikulum Merdeka, metode pembelajaran semakin berkembang dan interaktif — mulai dari Think Pair Share, Jigsaw, hingga Project Based Learning.</p>
+          <a href="https://www.mimwaru.sch.id/berita/detail/993773/metode-pembelajaran-untuk-kurikulum-merdeka/" target="_blank" rel="noopener" class="news-link">Baca Selengkapnya <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALERI ===== -->
+<section class="galeri pattern" id="galeri">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="kicker">Galeri Kegiatan</span>
+      <h2>Momen Indah di Madrasah Kami</h2>
+      <p>Dokumentasi kegiatan belajar mengajar dan pembiasaan baik yang dilakukan setiap hari.</p>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-item reveal">
+        <span class="count">2 Foto</span>
+        <img src="images/galeri-kbm.webp" alt="Kegiatan Belajar Mengajar">
+        <div class="overlay"><h3>Kegiatan Belajar Mengajar</h3><span>Akademik</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <span class="count">1 Foto</span>
+        <img src="images/galeri-senam.webp" alt="Kegiatan Senam Bersama Setiap Hari Selasa">
+        <div class="overlay"><h3>Kegiatan Senam Bersama Setiap Hari Selasa</h3><span>Kesehatan</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <span class="count">1 Foto</span>
+        <img src="images/galeri-tadarus.jpg" alt="Pembiasaan Tadarus Al Quran Setiap Hari Jumat">
+        <div class="overlay"><h3>Pembiasaan Tadarus Al-Qur'an Setiap Hari Jumat</h3><span>Keagamaan</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <span class="count">1 Foto</span>
+        <img src="images/galeri-kantin.jpg" alt="Kantin Sehat Sekolah">
+        <div class="overlay"><h3>Kantin Sehat Sekolah</h3><span>Gizi &amp; Kesehatan</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <span class="count">1 Foto</span>
+        <img src="images/galeri-uks.jpeg" alt="Kegiatan UKS">
+        <div class="overlay"><h3>Kegiatan UKS</h3><span>Kesehatan</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <span class="count">1 Foto</span>
+        <img src="images/galeri-guru.jpg" alt="Pengembangan Kompetensi Guru">
+        <div class="overlay"><h3>Pengembangan Kompetensi Guru</h3><span>Profesionalisme</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PPDB ===== -->
+<section class="ppdb" id="ppdb">
+  <div class="container">
+    <div class="ppdb-box reveal">
+      <div>
+        <h2>PPDB 2026/2027 Telah Dibuka!</h2>
+        <p>Berikan putra-putri Anda pendidikan Islam terbaik sejak dini. Kuota terbatas — segera daftarkan dan jadilah bagian dari keluarga besar MI Muhammadiyah Waru.</p>
+        <ul class="ppdb-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Gratis biaya pendaftaran gelombang pertama</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Diskon kakak-beradik &amp; alumni TK Islam</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#064e3b" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Beasiswa tahfidz untuk penghafal Al-Qur'an</li>
+        </ul>
+      </div>
+      <div class="ppdb-side">
+        <div class="big">Gelombang 1</div>
+        <p>1 Desember 2025 — 31 Januari 2026<br>Kuota: 60 peserta didik baru</p>
+        <a href="#kontak" class="btn btn-gold">Daftar Sekarang
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="kontak">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="brand">
+          <img src="images/logo.webp" alt="Logo MI Muhammadiyah Waru" class="brand-logo-img">
+          <span class="brand-name">MI Muhammadiyah Waru<small>Madrasah Ibtidaiyah</small></span>
+        </a>
+        <p>Madrasah Ibtidaiyah Muhammadiyah yang berkomitmen mencetak generasi Qur'ani, cerdas, dan berakhlak mulia di Baki, Sukoharjo, Jawa Tengah.</p>
+      </div>
+      <div>
+        <h4>Tautan Cepat</h4>
+        <ul class="foot-links">
+          <li><a href="#sambutan">Sambutan Kepala Madrasah</a></li>
+          <li><a href="#visi-misi">Visi &amp; Misi</a></li>
+          <li><a href="#profil">Profil Singkat</a></li>
+          <li><a href="#berita">Berita &amp; Pengumuman</a></li>
+          <li><a href="#galeri">Galeri Kegiatan</a></li>
+          <li><a href="#ppdb">PPDB Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Layanan</h4>
+        <ul class="foot-links">
+          <li><a href="#">E-Learning</a></li>
+          <li><a href="#">Perpustakaan Digital</a></li>
+          <li><a href="#">Kalender Akademik</a></li>
+          <li><a href="#">Alumni</a></li>
+          <li><a href="#">Pengaduan</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hubungi Kami</h4>
+        <ul class="foot-contact">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jl. Waru-Gentan, Dusun III, Waru, Kec. Baki, Kabupaten Sukoharjo, Jawa Tengah 57556</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg> info@mimwaru.sch.id</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Senin–Jumat: 07.00–15.00 WIB</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 <b>MI Muhammadiyah Waru</b>. Seluruh hak cipta dilindungi.</span>
+      <span>NPSN: 30104429 &nbsp;•&nbsp; www.mimwaru.sch.id</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Jam & tanggal live (Bahasa Indonesia)
+function updateClock(){
+  const now = new Date();
+  const hari = now.toLocaleDateString('id-ID',{weekday:'long'});
+  const tanggal = now.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+  const jam = now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'}).replace(/\./g,':');
+  document.getElementById('liveClock').textContent = hari + ', ' + tanggal + '  ' + jam + ' WIB';
+}
+updateClock(); setInterval(updateClock, 1000);
+
+// Navbar shadow saat scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 10);
+}, {passive:true});
+
+// Menu mobile
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+// News ticker: duplikat konten agar animasi mulus
+const tickerInner = document.getElementById('tickerInner');
+tickerInner.innerHTML += tickerInner.innerHTML;
+
+// Carousel foto hero
+const slides = document.querySelectorAll('#carousel img');
+const dotsWrap = document.getElementById('carouselDots');
+let current = 0, timer;
+slides.forEach((_, i) => {
+  const b = document.createElement('button');
+  b.setAttribute('aria-label', 'Slide ' + (i+1));
+  if (i === 0) b.classList.add('active');
+  b.addEventListener('click', () => goTo(i, true));
+  dotsWrap.appendChild(b);
+});
+const dots = dotsWrap.querySelectorAll('button');
+function goTo(i, manual){
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = (i + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+  if (manual){ clearInterval(timer); startAuto(); }
+}
+function startAuto(){ timer = setInterval(() => goTo(current + 1), 5000); }
+startAuto();
+
+// Animasi reveal saat scroll
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Counter statistik
+const counterIO = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target, target = +el.dataset.target, dur = 1400, t0 = performance.now();
+    const tick = now => {
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    counterIO.unobserve(el);
+  });
+}, {threshold:.6});
+document.querySelectorAll('.counter').forEach(el => counterIO.observe(el));
+</script>
+</body>
+</html>
